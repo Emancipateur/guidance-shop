@@ -1,0 +1,45 @@
+version: '3.1'
+services:
+  guidance_mailhog:
+    image: 'mailhog/mailhog:latest'
+    ports:
+      - '8030:8025'
+      - '1038:1025'
+
+  guidance_mariadb:
+    restart: unless-stopped
+    image: mariadb:10.3
+    working_dir: ''
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      LANG: C.UTF-8
+    volumes:
+      - './docker/mariadb/conf:/etc/mysql/conf.d'
+      - './docker/mariadb/init:/docker-entrypoint-initdb.d'
+      - 'guidance_data:/var/lib/mysql'
+    env_file:
+      - .env
+    ports:
+      - '8094:3306'
+
+  guidance_shop:
+    image: guidance:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./shop:/var/www/html
+    restart: unless-stopped
+    ports:
+      - '8095:80'
+      - '80:80'
+    env_file:
+      - .env
+
+networks:
+  default:
+    external:
+      name: voltagreen
+
+volumes:
+  guidance_data:

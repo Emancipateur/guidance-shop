@@ -1,0 +1,14 @@
+UPDATE `czur_configuration` SET VALUE = REPLACE(VALUE, 'http://www.emancipateur.com', 'http://guidance_shop');
+UPDATE `czur_configuration` SET VALUE = REPLACE(VALUE, 'https://www.emancipateur.com', 'http://guidance_shop');
+UPDATE `czur_configuration` SET VALUE = REPLACE(VALUE, 'www.emancipateur.com', 'guidance_shop');
+UPDATE `czur_configuration` SET `value`='0' WHERE  `name`='PS_SSL_ENABLED';
+UPDATE `czur_configuration` SET `value`='0' WHERE  `name`='PS_SSL_ENABLED_EVERYWHERE';
+UPDATE `czur_configuration` SET `value`='0' WHERE  `name`='PS_CSS_THEME_CACHE';
+UPDATE `czur_configuration` SET `value`='0' WHERE  `name`='PS_SMARTY_CACHE';
+UPDATE `czur_configuration` SET `value`='guidance_mailhog' WHERE  `name`='PS_MAIL_SERVER';
+UPDATE `czur_configuration` SET `value`='2' WHERE  `name`='PS_MAIL_METHOD';
+UPDATE `czur_configuration` SET `value`=NULL WHERE  `name`='PS_MAIL_USER';
+UPDATE `czur_configuration` SET `value`='off' WHERE  `name`='PS_MAIL_SMTP_ENCRYPTION';
+UPDATE `czur_configuration` SET `value`='1025' WHERE  `name`='PS_MAIL_SMTP_PORT';
+UPDATE `czur_configuration` SET `value`='Lax' WHERE  `name`='PS_COOKIE_SAMESITE';
+UPDATE `czur_shop_url` SET `domain`='guidance_shop', `domain_ssl`='guidance_shop' WHERE  `id_shop_url`=1;
